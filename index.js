@@ -1,4 +1,3 @@
-
 export default {
   async fetch(request, env, ctx) {
     if (request.method === 'POST') {
@@ -9,9 +8,9 @@ export default {
       let text = '';
 
       if (data.type === 'application') {
-        text = `💼 New Application:\nName: ${data.name}\nPhone: ${data.phone}`;
+        text = `💼 New Application:\\nName: ${data.name}\\nPhone: ${data.phone}`;
       } else if (data.type === 'activation') {
-        text = `✅ Activation:\nName: ${data.name}\nPhone: ${data.phone}\nCode: ${data.code}`;
+        text = `✅ Activation:\\nName: ${data.name}\\nPhone: ${data.phone}\\nCode: ${data.code}`;
       } else {
         return new Response('Invalid request', { status: 400 });
       }
